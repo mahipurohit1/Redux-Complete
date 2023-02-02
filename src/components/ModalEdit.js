@@ -7,10 +7,21 @@ function ModalEdit(props) {
     <Modal open={props.isOpen}>
       <Modal.Header> Edit Entry </Modal.Header>
       <Modal.Content>
-        <EntryForm></EntryForm>{" "}
+        <EntryForm
+          onAddEntry={props.addEntries}
+          description={props.description}
+          IsExpense={props.IsExpense}
+          setIsExpense={props.setIsExpense}
+          setDescription={props.setDescription}
+          value={props.value}
+          setValue={props.setValue}
+        ></EntryForm>
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={() => props.setIsOpen(false)}>close</Button>
+        <Button onClick={() => props.setIsOpen(false)} primary>
+          Save
+        </Button>
       </Modal.Actions>
     </Modal>
   );

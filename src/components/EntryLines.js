@@ -7,7 +7,11 @@ function EntryLines(props) {
       {props.entries.map((entry) => {
         return (
           <li key={entry.id}>
-            <EntryLine entry={entry} onDeleteEntry={props.onDeleteEntry} />
+            <EntryLine
+              entry={entry}
+              onDeleteEntry={props.onDeleteEntry}
+              editEntry={props.editEntry}
+            />
           </li>
         );
       })}

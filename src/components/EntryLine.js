@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, Icon, Segment } from "semantic-ui-react";
-import ModalEdit from "./ModalEdit";
 
 function EntryLine(props) {
-  const [IsOpen, setIsOpen] = useState(false);
   const deleteEntryHandler = () => {
     props.onDeleteEntry(props.entry.id);
   };
   const openModalHandler = () => {
-    setIsOpen(true);
+    props.editEntry(props.entry.id);
   };
   return (
     <>
@@ -28,7 +26,6 @@ function EntryLine(props) {
           </Grid.Row>
         </Grid>
       </Segment>
-      <ModalEdit isOpen={IsOpen} setIsOpen={setIsOpen}></ModalEdit>
     </>
   );
 }

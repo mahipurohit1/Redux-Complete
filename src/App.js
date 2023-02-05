@@ -7,14 +7,12 @@ import EntryLines from "./components/EntryLines";
 import ModalEdit from "./components/ModalEdit";
 import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
-const initialValue = [
-  { id: "e1", description: "work income", value: "1000", isExpense: false },
-  { id: "e2", description: "water bills", value: "105", isExpense: true },
-  { id: "e3", description: "rents", value: "100", isExpense: true },
-  { id: "e4", description: "power bills", value: "20", isExpense: true },
-];
+import { useDispatch, useSelector } from "react-redux";
+
 function App() {
-  const [entries, setEntries] = useState(initialValue);
+  const entries = useSelector((state) => state.entries);
+  const dispatch = useDispatch();
+  // const [entries, setEntries] = useState(initialValue);
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
   const [IsExpense, setIsExpense] = useState(true);
@@ -22,9 +20,11 @@ function App() {
   const [entryId, setEntryId] = useState("");
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
+
   const deleteEntries = (id) => {
-    const updatedEntries = entries.filter((entry) => entry.id !== id);
-    setEntries(updatedEntries);
+    // const updatedEntries = entries.filter((entry) => entry.id !== id);
+    // setEntries(updatedEntries);
+    dispatch({ type: "DELETE_ENTRY", payload: id });
   };
   const resetValue = () => {
     console.log("clicked");
@@ -39,9 +39,10 @@ function App() {
       newEntry[index].description = description;
       newEntry[index].value = value;
       newEntry[index].isExpense = IsExpense;
-      setEntries(newEntry);
+      // setEntries(newEntry);
       resetValue();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [IsOpen]);
 
   useEffect(() => {
@@ -62,7 +63,8 @@ function App() {
   }, [entries]);
 
   function addEntries(data) {
-    setEntries((prevState) => [...prevState, data]);
+    // setEntries((prevState) => [...prevState, data]);
+    dispatch({ type: "ADD_ENTRY", payload: data });
   }
 
   const editEntry = (id) => {

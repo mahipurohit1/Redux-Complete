@@ -1,13 +1,15 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
+import { v4 } from "uuid";
 function ButtonSaveOrCancel(props) {
   const addEntryHandler = () => {
     const data = {
-      id: (Math.random() * 1).toString(),
+      id: v4(),
       description: props.description,
       value: props.value,
       isExpense: props.IsExpense,
     };
+    console.log(data);
     props.onAddEntry(data);
     props.onResetValue();
   };
